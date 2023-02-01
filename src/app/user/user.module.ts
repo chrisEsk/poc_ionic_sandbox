@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ByAgeComponent } from './by-age/by-age.component';
 
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    ByAgeComponent
   ],
   imports: [
     CommonModule,

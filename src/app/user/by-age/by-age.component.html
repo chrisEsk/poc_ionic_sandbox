@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <u [routerLink]="['..']" (click)="clearLs()">← Limpiar filtrado y regresar</u>
+  <div *ngIf="results?.length" class="card mt-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <h1>Mayores o igual a {{results[0][0].edad}}:</h1>
+          <ul class="mt-4">
+            <li *ngFor="let item of results[0]">
+              {{item.nombre}} {{item.apellido}} - {{item.edad}} años, de {{item.ubicacion}}
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <h1>Menores a {{results[0][0].edad}}:</h1>
+          <ul class="mt-4">
+            <li *ngFor="let item of results[1]">
+              {{item.nombre}} {{item.apellido}} - {{item.edad}} años, de {{item.ubicacion}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,48 +1,66 @@
 <div class="container mt-4">
-  <div *ngIf="!showSummary; else summary">
-    <form [formGroup]="form" (ngSubmit)="onSave()" class="card">
-      <div class="card-body">
-        <div class="mb-3">
-          <label for="nombre" class="form-label">
-            Nombre
-          </label>
-          <input formControlName="nombre" id="nombre" type="text" class="form-control" aria-describedby="nombre" />
-        </div>
-        <div class="mb-3">
-          <label for="apellido" class="form-label">
-            Apellido
-          </label>
-          <input formControlName="apellido" id="apellido" type="text" class="form-control"
-            aria-describedby="apellido" />
-        </div>
-        <div class="mb-3">
-          <label for="edad" class="form-label">
-            Edad
-          </label>
-          <input formControlName="edad" id="edad" type="number" class="form-control" aria-describedby="edad" />
-        </div>
-        <div class="mb-3">
-          <label for="ubicacion" class="form-label">
-            Ubicación
-          </label>
-          <textarea formControlName="ubicacion" id="ubicacion" type="text" class="form-control"
-            aria-describedby="ubicacion"></textarea>
-        </div>
-        <button class="btn btn-primary" (click)="onSave()" type="submit">Guardar</button>
+  <form [formGroup]="form" class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">
+          Nombre
+        </label>
+        <input formControlName="nombre" id="nombre" type="text" class="form-control" aria-describedby="nombre" />
       </div>
-    </form>
-  </div>
-  <ng-template #summary>
-    <div class="card">
-      <div class="card-body">
-        <u (click)="goBack()">← Regresar</u>
-        <ul class="mt-4">
-          <li>Nombre: {{summaryData.nombre}}</li>
-          <li>Apellido: {{summaryData.apellido}}</li>
-          <li>Edad: {{summaryData.edad}}</li>
-          <li>Ubicacion: {{summaryData.ubicacion}}</li>
-        </ul>
+      <div class="mb-3">
+        <label for="apellido" class="form-label">
+          Apellido
+        </label>
+        <input formControlName="apellido" id="apellido" type="text" class="form-control"
+          aria-describedby="apellido" />
+      </div>
+      <div class="mb-3">
+        <label for="edad" class="form-label">
+          Edad
+        </label>
+        <input formControlName="edad" id="edad" type="number" class="form-control" aria-describedby="edad" />
+      </div>
+      <div class="mb-3">
+        <label for="ubicacion" class="form-label">
+          Ubicación
+        </label>
+        <textarea formControlName="ubicacion" id="ubicacion" type="text" class="form-control"
+          aria-describedby="ubicacion"></textarea>
+      </div>
+      <button class="btn btn-primary" (click)="onSave()" type="submit">Agregar</button>
+      <button class="m-4 btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar</button>
+    </div>
+  </form>
+
+  <div *ngFor="let item of newEntries" class="alert alert-primary my-4" role="alert">
+    <div class="row">
+      <div class="col-10">
+        {{item.nombre}} {{item.apellido}} - {{item.edad}} años, de {{item.ubicacion}}
+      </div>
+      <div class="col">
+        <button class="float-right btn btn-danger" (click)="onDelete(item)">Eliminar</button>
       </div>
     </div>
-  </ng-template>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modal">Filtrar por edad</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        Edad Mínima:
+        <br>
+        <input style="width: 100px" id="edadMinima" type="number" class="form-control" [(ngModel)]="minAge" />
+      </div>
+      <div class="modal-footer">
+        <button #closeModal type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onSend()">Filtrar</button>
+      </div>
+    </div>
+  </div>
 </div>
